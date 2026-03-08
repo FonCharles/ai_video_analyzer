@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"  // 关键：引入Flutter Gradle配置
+
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace "com.example.ai_video_analyzer"
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.ai_video_analyzer"
+        //minSdkVersion flutter.minSdkVersion
+        minSdkVersion 24
+        targetSdk 34
+        versionCode flutterVersionCode.toInteger()// 关键：修复flutterVersionCode解析
+        versionName flutterVersionName // 关键：修复flutterVersionName解析
+        multiDexEnabled true  // 可选，避免依赖过多导致DEX溢出
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source "../.."
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
